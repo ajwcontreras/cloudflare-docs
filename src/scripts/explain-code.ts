@@ -66,7 +66,7 @@ function createSheet(
 
 	// Base classes
 	let className =
-		"sheet-content fixed z-50 gap-4 bg-[var(--sl-color-bg)] p-6 transition ease-in-out";
+		"sheet-content fixed z-50 gap-4 bg-[var(--sl-color-bg)] p-6 transition ease-in-out overflow-y-auto";
 	let boxShadow = "";
 
 	// Add side-specific positioning, border, and shadow
@@ -105,7 +105,8 @@ function createSheet(
 	const closeButton = document.createElement("button");
 	closeButton.type = "button";
 	closeButton.className =
-		"sheet-close absolute right-4 top-4 rounded-sm opacity-70 ring-offset-[var(--sl-color-bg)] transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--sl-color-text-accent)] focus:ring-offset-2 disabled:pointer-events-none";
+		"sheet-close sticky top-0 right-0 ml-auto mb-4 rounded-sm opacity-70 ring-offset-[var(--sl-color-bg)] transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--sl-color-text-accent)] focus:ring-offset-2 disabled:pointer-events-none z-10 bg-[var(--sl-color-bg)] w-fit";
+	closeButton.style.float = "right";
 	closeButton.setAttribute("aria-label", "Close");
 	closeButton.innerHTML = `
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
@@ -126,10 +127,28 @@ function createSheet(
 
 	const explanationText = document.createElement("div");
 	explanationText.className =
-		"text-sm text-[var(--sl-color-gray-2)] p-4 bg-[var(--sl-color-gray-6)] rounded";
+		"text-sm text-[var(--sl-color-gray-2)] p-4 bg-[var(--sl-color-gray-6)] rounded overflow-auto";
 	explanationText.innerHTML = `
-		<p class="mb-2">This feature would integrate with an AI service to provide code explanations.</p>
-		<p class="text-xs opacity-70">Note: This is a placeholder. Connect to your preferred AI service to enable real explanations.</p>
+		<p class="mb-4">This feature would integrate with an AI service to provide code explanations. The AI would analyze the code structure, identify key patterns, and explain what the code does in plain language.</p>
+
+		<p class="mb-4">When connected to an AI service, this panel would display a comprehensive breakdown of the code snippet, including:</p>
+
+		<ul class="list-disc list-inside mb-4 space-y-2">
+			<li>An overview of what the code accomplishes</li>
+			<li>Explanation of key functions and their purposes</li>
+			<li>Description of important variables and data structures</li>
+			<li>Analysis of any algorithms or design patterns used</li>
+			<li>Potential use cases and applications</li>
+			<li>Common pitfalls or edge cases to be aware of</li>
+		</ul>
+
+		<p class="mb-4">The explanation would be tailored to the programming language and complexity level of the code. For beginners, it would provide more context and foundational concepts. For advanced users, it would focus on optimization opportunities, best practices, and architectural considerations.</p>
+
+		<p class="mb-4">Additionally, the AI could highlight specific lines of code and explain their role in the overall logic flow. It might suggest improvements, identify potential bugs, or recommend alternative approaches that could make the code more efficient or maintainable.</p>
+
+		<p class="mb-4">This type of interactive code explanation can be particularly valuable for learning new frameworks, understanding legacy codebases, or quickly getting up to speed with unfamiliar code patterns. It serves as an on-demand coding mentor that's available whenever you need clarification.</p>
+
+		<p class="text-xs opacity-70 mt-6">Note: This is a placeholder with extended content for testing purposes. Connect to your preferred AI service to enable real explanations.</p>
 	`;
 
 	content.appendChild(closeButton);
