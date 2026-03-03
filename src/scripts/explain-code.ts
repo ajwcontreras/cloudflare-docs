@@ -1,14 +1,6 @@
-console.log("[Explain Code] Script loaded!");
-
 const sheets = new Map<string, HTMLDivElement>();
 
 function initExplainCodeButtons() {
-	const buttons = document.querySelectorAll<HTMLButtonElement>(
-		"button[data-sheet-trigger]",
-	);
-
-	console.log(`[Explain Code] Found ${buttons.length} explain code buttons`);
-
 	// Use event delegation on document body to catch all clicks
 	document.body.addEventListener("click", (e) => {
 		const target = e.target as HTMLElement;
@@ -18,7 +10,6 @@ function initExplainCodeButtons() {
 
 		if (!button) return;
 
-		console.log(`[Explain Code] Button clicked via delegation!`);
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -26,28 +17,17 @@ function initExplainCodeButtons() {
 		const codeContent = button.dataset.codeContent;
 		const codeLanguage = button.dataset.codeLanguage;
 
-		console.log(`[Explain Code] Button data:`, {
-			sheetId,
-			hasContent: !!codeContent,
-			codeLanguage,
-		});
-
-		if (!sheetId || !codeContent) {
-			console.warn(`[Explain Code] Button missing required data attributes`);
-			return;
-		}
+		if (!sheetId || !codeContent) return;
 
 		let sheet = sheets.get(sheetId);
 
 		if (!sheet) {
-			console.log(`[Explain Code] Creating sheet...`);
 			sheet = createSheet(sheetId, codeContent, codeLanguage || "text");
 			document.body.appendChild(sheet);
 			initSheet(sheet);
 			sheets.set(sheetId, sheet);
 		}
 
-		console.log(`[Explain Code] Opening sheet...`);
 		openSheet(sheet);
 	});
 }
@@ -105,8 +85,10 @@ function createSheet(
 	const closeButton = document.createElement("button");
 	closeButton.type = "button";
 	closeButton.className =
-		"sheet-close sticky top-0 right-0 ml-auto mb-4 rounded-sm opacity-70 ring-offset-[var(--sl-color-bg)] transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--sl-color-text-accent)] focus:ring-offset-2 disabled:pointer-events-none z-10 bg-[var(--sl-color-bg)] w-fit";
+		"sheet-close sticky top-0 right-0 ml-auto mb-4 rounded-sm opacity-70 ring-offset-[var(--sl-color-bg)] transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--sl-color-text-accent)] focus:ring-offset-2 disabled:pointer-events-none z-10 bg-[var(--sl-color-bg)] flex items-center justify-center";
 	closeButton.style.float = "right";
+	closeButton.style.width = "2rem";
+	closeButton.style.height = "2rem";
 	closeButton.setAttribute("aria-label", "Close");
 	closeButton.innerHTML = `
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
@@ -217,23 +199,16 @@ function openSheet(container: HTMLElement) {
 	firstFocusable?.focus();
 }
 
-console.log("[Explain Code] Setting up event listener for astro:page-load");
-
 document.addEventListener("astro:page-load", () => {
-	console.log("[Explain Code] astro:page-load event fired!");
 	initExplainCodeButtons();
 });
 
 // Also try DOMContentLoaded as a fallback
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("[Explain Code] DOMContentLoaded event fired!");
 	initExplainCodeButtons();
 });
 
 // And try running immediately if DOM is already loaded
-if (document.readyState === "loading") {
-	console.log("[Explain Code] DOM is still loading, waiting...");
-} else {
-	console.log("[Explain Code] DOM already loaded, initializing immediately");
+if (document.readyState !== "loading") {
 	initExplainCodeButtons();
 }
