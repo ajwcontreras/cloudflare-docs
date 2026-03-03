@@ -6,3 +6,7 @@
 	width: 2rem !important;
 	height: 2rem !important;
 }
+
+.has-explain-button + .copy {
+	right: 3rem;
+}
