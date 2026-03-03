@@ -4,61 +4,6 @@ import { definePlugin } from "@expressive-code/core";
 export default () => {
 	return definePlugin({
 		name: "Adds 'Explain Code' button to code blocks with 10+ lines",
-		baseStyles: `
-		.explain-button {
-			position: absolute;
-			top: 0.5rem;
-			right: 0.5rem;
-			z-index: 10;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 2rem;
-			height: 2rem;
-			padding: 0;
-			border: 1px solid var(--ec-brdCol);
-			border-radius: 0.25rem;
-			background: var(--sl-color-bg);
-			color: var(--sl-color-text);
-			cursor: pointer;
-			transition: all 0.2s;
-			opacity: 1;
-		}
-
-		.explain-button:hover {
-			background: var(--sl-color-gray-6);
-			border-color: var(--sl-color-text-accent);
-		}
-
-		.explain-button:focus {
-			outline: 2px solid var(--sl-color-text-accent);
-			outline-offset: 2px;
-		}
-
-		.explain-button svg {
-			width: 1rem;
-			height: 1rem;
-		}
-
-		.explain-tooltip {
-			position: absolute;
-			top: -2rem;
-			right: 0;
-			padding: 0.25rem 0.5rem;
-			background: var(--sl-color-black);
-			color: var(--sl-color-white);
-			font-size: 0.75rem;
-			border-radius: 0.25rem;
-			white-space: nowrap;
-			opacity: 0;
-			pointer-events: none;
-			transition: opacity 0.2s;
-		}
-
-		.explain-button:hover .explain-tooltip {
-			opacity: 1;
-		}
-		`,
 		hooks: {
 			postprocessRenderedBlock: async (context) => {
 				const lineCount = context.codeBlock.code.split("\n").length;
