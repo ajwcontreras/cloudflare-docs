@@ -1,6 +1,11 @@
 const sheets = new Map<string, HTMLDivElement>();
+let isInitialized = false;
 
 function initExplainCodeButtons() {
+	// Prevent multiple initializations
+	if (isInitialized) return;
+	isInitialized = true;
+
 	// Use event delegation on document body to catch all clicks
 	document.body.addEventListener("click", (e) => {
 		const target = e.target as HTMLElement;
