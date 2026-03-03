@@ -154,11 +154,7 @@ function initSheet(container: HTMLElement) {
 
 	if (!content) return;
 
-	let isOpen = false;
-
 	function closeSheet() {
-		isOpen = false;
-
 		const side = content.dataset.side || "right";
 		const slideInClass = `slide-in-from-${side}`;
 		const slideOutClass = `slide-out-to-${side}`;
@@ -179,7 +175,7 @@ function initSheet(container: HTMLElement) {
 	closeButton?.addEventListener("click", closeSheet);
 
 	document.addEventListener("keydown", (e) => {
-		if (e.key === "Escape" && isOpen) {
+		if (e.key === "Escape" && content.dataset.state === "open") {
 			closeSheet();
 		}
 	});
