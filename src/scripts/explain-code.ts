@@ -1,13 +1,21 @@
 const sheets = new Map<string, HTMLDivElement>();
-let isInitialized = false;
+const sheetListeners = new WeakMap<
+	HTMLElement,
+	{
+		closeButton: () => void;
+		escapeKey: (e: KeyboardEvent) => void;
+	}
+>();
+let clickHandler: ((e: MouseEvent) => void) | null = null;
 
 function initExplainCodeButtons() {
-	// Prevent multiple initializations
-	if (isInitialized) return;
-	isInitialized = true;
+	// Remove existing handler if present
+	if (clickHandler) {
+		document.body.removeEventListener("click", clickHandler);
+	}
 
-	// Use event delegation on document body to catch all clicks
-	document.body.addEventListener("click", (e) => {
+	// Create new click handler
+	clickHandler = (e: MouseEvent) => {
 		const target = e.target as HTMLElement;
 		const button = target.closest<HTMLButtonElement>(
 			"button[data-sheet-trigger]",
@@ -34,7 +42,21 @@ function initExplainCodeButtons() {
 		}
 
 		openSheet(sheet);
-	});
+	};
+
+	// Attach the new handler
+	document.body.addEventListener("click", clickHandler);
+}
+
+function cleanup() {
+	// Remove click handler
+	if (clickHandler) {
+		document.body.removeEventListener("click", clickHandler);
+		clickHandler = null;
+	}
+
+	// Restore body overflow in case a sheet was open
+	document.body.style.overflow = "";
 }
 
 function createSheet(
@@ -154,6 +176,9 @@ function initSheet(container: HTMLElement) {
 
 	if (!content) return;
 
+	// Check if listeners already exist for this sheet
+	if (sheetListeners.has(content)) return;
+
 	function closeSheet() {
 		const side = content.dataset.side || "right";
 		const slideInClass = `slide-in-from-${side}`;
@@ -172,13 +197,23 @@ function initSheet(container: HTMLElement) {
 		document.body.style.overflow = "";
 	}
 
-	closeButton?.addEventListener("click", closeSheet);
-
-	document.addEventListener("keydown", (e) => {
+	// Create listener functions that can be removed later
+	const closeButtonHandler = () => closeSheet();
+	const escapeKeyHandler = (e: KeyboardEvent) => {
 		if (e.key === "Escape" && content.dataset.state === "open") {
 			closeSheet();
 		}
+	};
+
+	// Store listener references for potential cleanup
+	sheetListeners.set(content, {
+		closeButton: closeButtonHandler,
+		escapeKey: escapeKeyHandler,
 	});
+
+	// Attach listeners
+	closeButton?.addEventListener("click", closeButtonHandler);
+	document.addEventListener("keydown", escapeKeyHandler);
 }
 
 function openSheet(container: HTMLElement) {
@@ -200,16 +235,22 @@ function openSheet(container: HTMLElement) {
 	firstFocusable?.focus();
 }
 
+// Clean up before Astro swaps pages (view transitions)
+document.addEventListener("astro:before-swap", () => {
+	cleanup();
+});
+
+// Initialize on every page load (works with view transitions)
 document.addEventListener("astro:page-load", () => {
 	initExplainCodeButtons();
 });
 
-// Also try DOMContentLoaded as a fallback
-document.addEventListener("DOMContentLoaded", () => {
-	initExplainCodeButtons();
-});
-
-// And try running immediately if DOM is already loaded
-if (document.readyState !== "loading") {
+// Fallback for non-Astro environments or initial page load
+if (document.readyState === "loading") {
+	document.addEventListener("DOMContentLoaded", () => {
+		initExplainCodeButtons();
+	});
+} else {
+	// DOM already loaded, initialize immediately
 	initExplainCodeButtons();
 }
