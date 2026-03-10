@@ -160,10 +160,25 @@ function createSheet(
 		<p class="text-xs opacity-70 mt-6">Note: This is a placeholder with extended content for testing purposes. Connect to your preferred AI service to enable real explanations.</p>
 	`;
 
+	const disclaimer = document.createElement("div");
+	disclaimer.className =
+		"flex items-start gap-3 p-4 mt-4 rounded bg-[var(--sl-color-orange-low)] border border-[var(--sl-color-orange)] text-sm text-[var(--sl-color-text)]";
+	disclaimer.innerHTML = `
+		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5" style="color: var(--sl-color-orange);">
+			<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+			<line x1="12" y1="9" x2="12" y2="13"/>
+			<line x1="12" y1="17" x2="12.01" y2="17"/>
+		</svg>
+		<div>
+			<p>Explain Code is experimental and may produce incorrect answers. Always verify the output before executing.</p>
+		</div>
+	`;
+
 	content.appendChild(closeButton);
 	content.appendChild(title);
 	content.appendChild(description);
 	content.appendChild(explanationText);
+	content.appendChild(disclaimer);
 
 	container.appendChild(content);
 
