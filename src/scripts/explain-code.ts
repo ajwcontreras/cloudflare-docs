@@ -185,6 +185,31 @@ function createSheet(
 	return container;
 }
 
+function showLoading(container: HTMLElement) {
+	const content = container.querySelector(".sheet-content") as HTMLElement;
+	if (!content) return;
+
+	// Find and replace the explanation text with loading skeleton
+	const explanationText = content.querySelector(
+		".text-sm.text-\\[var\\(--sl-color-gray-2\\)\\].p-4",
+	) as HTMLElement;
+	if (!explanationText) return;
+
+	explanationText.innerHTML = `
+		<div class="space-y-3 animate-pulse">
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-full"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-5/6"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-4/6"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-full mt-6"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-3/4"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-5/6"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-2/3 mt-6"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-full"></div>
+			<div class="h-4 bg-[var(--sl-color-gray-5)] rounded w-4/5"></div>
+		</div>
+	`;
+}
+
 function showError(container: HTMLElement, errorMessage: string) {
 	const content = container.querySelector(".sheet-content") as HTMLElement;
 	if (!content) return;
