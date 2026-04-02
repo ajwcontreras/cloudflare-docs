@@ -1,6 +1,23 @@
 // @ts-check
 import { definePlugin } from "@expressive-code/core";
 
+/**
+ * @param {import("hast").Element} node
+ * @returns {import("hast").Element | null}
+ */
+function findPre(node) {
+	if (node.tagName === "pre") return node;
+	if (node.children) {
+		for (const child of node.children) {
+			if (child.type === "element") {
+				const result = findPre(child);
+				if (result) return result;
+			}
+		}
+	}
+	return null;
+}
+
 export default () => {
 	return definePlugin({
 		name: "Adds 'Explain Code' button to code blocks with 10+ lines",
@@ -10,41 +27,25 @@ export default () => {
 
 				if (lineCount < 10) return;
 
-				const codeContent = context.codeBlock.code;
-				const language = context.codeBlock.language;
-				const sheetId = `explain-code-${Math.random().toString(36).substring(2, 11)}`;
-
-				// Find the pre element to add the button to
-				const findPre = (node) => {
-					if (node.tagName === "pre") return node;
-					if (node.children) {
-						for (const child of node.children) {
-							const result = findPre(child);
-							if (result) return result;
-						}
-					}
-					return null;
-				};
-
-				const preElement = findPre(context.renderData.blockAst);
+				const preElement = findPre(
+					/** @type {import("hast").Element} */ (context.renderData.blockAst),
+				);
 				if (!preElement) return;
 
-				// Add class to pre element to help position the copy button
 				preElement.properties = preElement.properties || {};
 				preElement.properties.className = preElement.properties.className || [];
 				if (Array.isArray(preElement.properties.className)) {
 					preElement.properties.className.push("has-explain-button");
 				}
 
+				/** @type {import("hast").Element} */
 				const explainButton = {
 					type: "element",
 					tagName: "button",
 					properties: {
 						className: ["explain-button"],
 						type: "button",
-						"data-sheet-trigger": sheetId,
-						"data-code-content": codeContent,
-						"data-code-language": language,
+						"data-explain-code": "",
 						"aria-label": "Explain Code",
 					},
 					children: [
@@ -74,33 +75,25 @@ export default () => {
 								{
 									type: "element",
 									tagName: "path",
-									properties: {
-										d: "M20 3v4",
-									},
+									properties: { d: "M20 3v4" },
 									children: [],
 								},
 								{
 									type: "element",
 									tagName: "path",
-									properties: {
-										d: "M22 5h-4",
-									},
+									properties: { d: "M22 5h-4" },
 									children: [],
 								},
 								{
 									type: "element",
 									tagName: "path",
-									properties: {
-										d: "M4 17v2",
-									},
+									properties: { d: "M4 17v2" },
 									children: [],
 								},
 								{
 									type: "element",
 									tagName: "path",
-									properties: {
-										d: "M5 18H3",
-									},
+									properties: { d: "M5 18H3" },
 									children: [],
 								},
 							],
