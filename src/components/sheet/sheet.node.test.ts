@@ -1,74 +1,80 @@
-import { describe, expect, test } from "vitest";
-import { readFileSync } from "fs";
-import { join } from "path";
+import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
+import { screen, fireEvent } from "@testing-library/dom";
+import type { SheetElement } from "./sheet";
+import "./sheet";
 
-describe("SheetElement source", () => {
-	const sheetSource = readFileSync(join(__dirname, "sheet.ts"), "utf-8");
-
-	test("exports SheetElement class", () => {
-		expect(sheetSource).toContain("class SheetElement extends HTMLElement");
-		expect(sheetSource).toContain("export { SheetElement }");
+describe("<cfdocs-sheet>", () => {
+	beforeEach(() => {
+		vi.useFakeTimers();
 	});
 
-	test("registers custom element with cfdocs-sheet tag", () => {
-		expect(sheetSource).toContain('customElements.define("cfdocs-sheet"');
+	afterEach(() => {
+		document.body.innerHTML = "";
+		vi.useRealTimers();
 	});
 
-	test("implements connectedCallback", () => {
-		expect(sheetSource).toContain("connectedCallback()");
+	test("renders dialog structure when connected", () => {
+		const sheet = document.createElement("cfdocs-sheet");
+		document.body.appendChild(sheet);
+
+		expect(screen.getByRole("dialog", { hidden: true })).toBeTruthy();
+		expect(
+			screen.getByRole("button", { name: /close/i, hidden: true }),
+		).toBeTruthy();
 	});
 
-	test("implements disconnectedCallback", () => {
-		expect(sheetSource).toContain("disconnectedCallback()");
+	test("open() shows the dialog and locks body scroll", () => {
+		const sheet = document.createElement("cfdocs-sheet") as SheetElement;
+		document.body.appendChild(sheet);
+
+		sheet.open();
+
+		const dialog = screen.getByRole("dialog");
+		expect(dialog.hasAttribute("open")).toBe(true);
+		expect(document.body.style.overflow).toBe("hidden");
 	});
 
-	test("implements setContent method", () => {
-		expect(sheetSource).toContain("setContent(html: string)");
+	test("close() animates, closes dialog, dispatches event, resets scroll, and removes from DOM", () => {
+		const sheet = document.createElement("cfdocs-sheet") as SheetElement;
+		document.body.appendChild(sheet);
+		sheet.open();
+
+		const closeHandler = vi.fn();
+		sheet.addEventListener("sheet-close", closeHandler);
+
+		const dialog = screen.getByRole("dialog");
+
+		sheet.close();
+
+		expect(dialog.classList.contains("closing")).toBe(true);
+		expect(document.body.style.overflow).toBe("hidden");
+
+		// need to wait for the animation to finish
+		vi.advanceTimersByTime(300);
+
+		expect(dialog.hasAttribute("open")).toBe(false);
+		expect(closeHandler).toHaveBeenCalledTimes(1);
+		expect(document.body.style.overflow).toBe("");
+		expect(document.body.contains(sheet)).toBe(false);
 	});
 
-	test("implements open method with showModal", () => {
-		expect(sheetSource).toContain("open()");
-		expect(sheetSource).toContain("showModal()");
+	test("close button triggers close", () => {
+		const sheet = document.createElement("cfdocs-sheet") as SheetElement;
+		document.body.appendChild(sheet);
+		sheet.open();
+
+		fireEvent.click(screen.getByRole("button", { name: /close/i }));
+
+		vi.advanceTimersByTime(300);
+		expect(document.body.contains(sheet)).toBe(false);
 	});
 
-	test("implements close method with animation", () => {
-		expect(sheetSource).toContain("close()");
-		expect(sheetSource).toContain('classList.add("closing")');
-	});
+	test("setContent() updates inner HTML", () => {
+		const sheet = document.createElement("cfdocs-sheet") as SheetElement;
+		document.body.appendChild(sheet);
 
-	test("dispatches sheet-close event", () => {
-		expect(sheetSource).toContain('new CustomEvent("sheet-close")');
-	});
+		sheet.setContent("<p>Test content</p>");
 
-	test("handles backdrop click", () => {
-		expect(sheetSource).toContain("e.target === this.dialog");
-	});
-
-	test("includes required CSS styles", () => {
-		expect(sheetSource).toContain(".sheet-dialog");
-		expect(sheetSource).toContain(".sheet-content");
-		expect(sheetSource).toContain(".sheet-close");
-		expect(sheetSource).toContain("slide-in-from-right");
-		expect(sheetSource).toContain("slide-out-to-right");
-	});
-
-	test("includes styles inline in component HTML", () => {
-		expect(sheetSource).toContain("<style>${SHEET_STYLES}</style>");
-	});
-
-	test("does not include ::backdrop styles (handled globally)", () => {
-		expect(sheetSource).not.toContain("::backdrop");
-	});
-
-	test("prevents body scroll when open", () => {
-		expect(sheetSource).toContain('document.body.style.overflow = "hidden"');
-	});
-
-	test("resets body scroll on close", () => {
-		expect(sheetSource).toContain('document.body.style.overflow = ""');
-	});
-
-	test("removes self from DOM on close", () => {
-		expect(sheetSource).toContain("this.remove()");
+		expect(screen.getByText("Test content")).toBeTruthy();
 	});
 });

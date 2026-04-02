@@ -1,107 +1,132 @@
-import { describe, expect, test } from "vitest";
-import { readFileSync } from "fs";
-import { join } from "path";
+import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
+import { screen } from "@testing-library/dom";
+import "./explain-code-sheet";
 
-describe("ExplainCodeElement source", () => {
-	const source = readFileSync(
-		join(__dirname, "explain-code-sheet.ts"),
-		"utf-8",
-	);
+describe("<cfdocs-explain-code>", () => {
+	beforeEach(() => {
+		vi.stubGlobal("fetch", vi.fn());
 
-	test("imports sheet component", () => {
-		expect(source).toContain('import "../sheet/sheet"');
+		Object.defineProperty(window, "location", {
+			value: { pathname: "/workers/examples/" },
+			writable: true,
+		});
 	});
 
-	test("exports ExplainCodeElement class", () => {
-		expect(source).toContain("class ExplainCodeElement extends HTMLElement");
-		expect(source).toContain("export { ExplainCodeElement }");
+	afterEach(() => {
+		document.body.innerHTML = "";
+		vi.unstubAllGlobals();
 	});
 
-	test("registers custom element with cfdocs-explain-code tag", () => {
-		expect(source).toContain('customElements.define("cfdocs-explain-code"');
+	test("creates sheet and shows loading state", () => {
+		vi.mocked(fetch).mockImplementation(() => new Promise(() => {}));
+
+		const explainCode = document.createElement("cfdocs-explain-code");
+		explainCode.setAttribute("code-block-position", "1");
+		document.body.appendChild(explainCode);
+
+		expect(screen.getByRole("dialog", { hidden: true })).toBeTruthy();
+		expect(
+			screen.getByRole("heading", { name: /code explanation/i }),
+		).toBeTruthy();
 	});
 
-	test("implements connectedCallback", () => {
-		expect(source).toContain("connectedCallback()");
+	test("fetches from correct API URL with code block position", () => {
+		vi.mocked(fetch).mockImplementation(() => new Promise(() => {}));
+
+		const explainCode = document.createElement("cfdocs-explain-code");
+		explainCode.setAttribute("code-block-position", "3");
+		document.body.appendChild(explainCode);
+
+		expect(fetch).toHaveBeenCalledWith(
+			"https://docs-ai-production.cloudflare-docs.workers.dev/explain/workers/examples?codeBlock=3",
+			expect.objectContaining({
+				headers: { Accept: "text/html" },
+			}),
+		);
 	});
 
-	test("implements disconnectedCallback with abort", () => {
-		expect(source).toContain("disconnectedCallback()");
-		expect(source).toContain("this.abortController?.abort()");
+	test("shows explanation on successful response", async () => {
+		vi.mocked(fetch).mockResolvedValue({
+			ok: true,
+			headers: new Headers({ "cf-docs-finish-reason": "stop" }),
+			text: () => Promise.resolve("<p>This code creates a Worker.</p>"),
+		} as Response);
+
+		const explainCode = document.createElement("cfdocs-explain-code");
+		explainCode.setAttribute("code-block-position", "1");
+		document.body.appendChild(explainCode);
+
+		await vi.waitFor(() => {
+			expect(
+				screen.getByText(/experimental and may produce incorrect/i),
+			).toBeTruthy();
+		});
+
+		expect(screen.getByText("This code creates a Worker.")).toBeTruthy();
 	});
 
-	test("reads code-block-position attribute", () => {
-		expect(source).toContain('getAttribute("code-block-position")');
+	test("shows error state on fetch failure", async () => {
+		vi.mocked(fetch).mockRejectedValue(new Error("Network error"));
+
+		const explainCode = document.createElement("cfdocs-explain-code");
+		explainCode.setAttribute("code-block-position", "1");
+		document.body.appendChild(explainCode);
+
+		await vi.waitFor(() => {
+			expect(screen.getByText(/unable to generate explanation/i)).toBeTruthy();
+		});
 	});
 
-	test("creates cfdocs-sheet element", () => {
-		expect(source).toContain("<cfdocs-sheet></cfdocs-sheet>");
+	test("shows error when finish-reason header is not 'stop'", async () => {
+		vi.mocked(fetch).mockResolvedValue({
+			ok: true,
+			headers: new Headers({ "cf-docs-finish-reason": "length" }),
+			text: () => Promise.resolve("partial content"),
+		} as Response);
+
+		const explainCode = document.createElement("cfdocs-explain-code");
+		explainCode.setAttribute("code-block-position", "1");
+		document.body.appendChild(explainCode);
+
+		await vi.waitFor(() => {
+			expect(screen.getByText(/unable to generate explanation/i)).toBeTruthy();
+		});
 	});
 
-	test("listens for sheet-close event", () => {
-		expect(source).toContain('addEventListener("sheet-close"');
+	test("aborts fetch when disconnected", () => {
+		const abortSpy = vi.fn();
+		vi.mocked(fetch).mockImplementation((_, options) => {
+			(options as RequestInit)?.signal?.addEventListener("abort", abortSpy);
+			return new Promise(() => {});
+		});
+
+		const explainCode = document.createElement("cfdocs-explain-code");
+		explainCode.setAttribute("code-block-position", "1");
+		document.body.appendChild(explainCode);
+
+		explainCode.remove();
+
+		expect(abortSpy).toHaveBeenCalled();
 	});
 
-	test("shows loading state initially", () => {
-		expect(source).toContain("LOADING_HTML");
-		expect(source).toContain("loading-skeleton");
-		expect(source).toContain("skeleton-line");
-	});
+	test("removes itself when sheet dispatches close event", async () => {
+		vi.mocked(fetch).mockResolvedValue({
+			ok: true,
+			headers: new Headers({ "cf-docs-finish-reason": "stop" }),
+			text: () => Promise.resolve("<p>Explanation</p>"),
+		} as Response);
 
-	test("implements fetchExplanation method", () => {
-		expect(source).toContain("async fetchExplanation()");
-	});
+		const explainCode = document.createElement("cfdocs-explain-code");
+		explainCode.setAttribute("code-block-position", "1");
+		document.body.appendChild(explainCode);
 
-	test("uses AbortController for fetch cancellation", () => {
-		expect(source).toContain("new AbortController()");
-		expect(source).toContain("signal: this.abortController.signal");
-	});
+		await vi.waitFor(() => {
+			expect(screen.getByText("Explanation")).toBeTruthy();
+		});
 
-	test("checks cf-docs-finish-reason header", () => {
-		expect(source).toContain('headers.get("cf-docs-finish-reason")');
-		expect(source).toContain('finishReason !== "stop"');
-	});
+		const sheet = explainCode.querySelector("cfdocs-sheet")!;
+		sheet.dispatchEvent(new CustomEvent("sheet-close"));
 
-	test("handles AbortError silently", () => {
-		expect(source).toContain('(error as Error).name === "AbortError"');
-		expect(source).toContain("return;");
-	});
-
-	test("shows error state on failure", () => {
-		expect(source).toContain("ERROR_HTML");
-		expect(source).toContain("error-state");
-	});
-
-	test("has success HTML with explanation content", () => {
-		expect(source).toContain("getSuccessHtml(explanation: string)");
-		expect(source).toContain("explanation-content");
-	});
-
-	test("includes disclaimer", () => {
-		expect(source).toContain("sheet-disclaimer");
-		expect(source).toContain("experimental and may produce incorrect answers");
-	});
-
-	test("uses PUBLIC_EXPLAIN_CODE_API_URL env var with fallback", () => {
-		expect(source).toContain("PUBLIC_EXPLAIN_CODE_API_URL");
-		expect(source).toContain("docs-ai-production.cloudflare-docs.workers.dev");
-	});
-
-	test("builds correct API URL with path and codeBlock", () => {
-		expect(source).toContain("window.location.pathname");
-		expect(source).toContain("/explain/");
-		expect(source).toContain("codeBlock=");
-	});
-
-	test("includes styles inline in content HTML", () => {
-		expect(source).toContain("<style>${EXPLAIN_CODE_STYLES}</style>");
-	});
-
-	test("includes required CSS classes", () => {
-		expect(source).toContain(".sheet-title");
-		expect(source).toContain(".explanation-content");
-		expect(source).toContain(".loading-skeleton");
-		expect(source).toContain(".error-state");
-		expect(source).toContain(".sheet-disclaimer");
+		expect(document.body.contains(explainCode)).toBe(false);
 	});
 });

@@ -82,7 +82,13 @@ const SHEET_STYLES = `
 }
 `;
 
-class SheetElement extends HTMLElement {
+interface SheetElement extends HTMLElement {
+	open(): void;
+	close(): void;
+	setContent(html: string): void;
+}
+
+class SheetElementImpl extends HTMLElement implements SheetElement {
 	private dialog: HTMLDialogElement | null = null;
 	private contentContainer: HTMLElement | null = null;
 
@@ -157,6 +163,6 @@ class SheetElement extends HTMLElement {
 	}
 }
 
-customElements.define("cfdocs-sheet", SheetElement);
+customElements.define("cfdocs-sheet", SheetElementImpl);
 
-export { SheetElement };
+export type { SheetElement };
