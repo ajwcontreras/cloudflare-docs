@@ -77,13 +77,6 @@ describe("ExplainCodeElement source", () => {
 		expect(source).toContain("explanation-content");
 	});
 
-	test("includes AI provider buttons", () => {
-		expect(source).toContain("Explore with ChatGPT");
-		expect(source).toContain("Explore with Claude");
-		expect(source).toContain('data-provider="chatgpt"');
-		expect(source).toContain('data-provider="claude"');
-	});
-
 	test("includes disclaimer", () => {
 		expect(source).toContain("sheet-disclaimer");
 		expect(source).toContain("experimental and may produce incorrect answers");
@@ -100,9 +93,8 @@ describe("ExplainCodeElement source", () => {
 		expect(source).toContain("codeBlock=");
 	});
 
-	test("injects styles with unique ID", () => {
-		expect(source).toContain("cfdocs-explain-code-styles");
-		expect(source).toContain('getElementById("cfdocs-explain-code-styles")');
+	test("includes styles inline in content HTML", () => {
+		expect(source).toContain("<style>${EXPLAIN_CODE_STYLES}</style>");
 	});
 
 	test("includes required CSS classes", () => {
@@ -110,8 +102,6 @@ describe("ExplainCodeElement source", () => {
 		expect(source).toContain(".explanation-content");
 		expect(source).toContain(".loading-skeleton");
 		expect(source).toContain(".error-state");
-		expect(source).toContain(".sheet-actions");
-		expect(source).toContain(".explore-btn");
 		expect(source).toContain(".sheet-disclaimer");
 	});
 });

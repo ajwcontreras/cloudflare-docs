@@ -52,9 +52,12 @@ describe("SheetElement source", () => {
 		expect(sheetSource).toContain("slide-out-to-right");
 	});
 
-	test("injects styles with unique ID to prevent duplicates", () => {
-		expect(sheetSource).toContain("cfdocs-sheet-styles");
-		expect(sheetSource).toContain('getElementById("cfdocs-sheet-styles")');
+	test("includes styles inline in component HTML", () => {
+		expect(sheetSource).toContain("<style>${SHEET_STYLES}</style>");
+	});
+
+	test("does not include ::backdrop styles (handled globally)", () => {
+		expect(sheetSource).not.toContain("::backdrop");
 	});
 
 	test("prevents body scroll when open", () => {

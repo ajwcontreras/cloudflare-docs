@@ -12,10 +12,6 @@ const SHEET_STYLES = `
 	background: transparent;
 }
 
-.sheet-dialog::backdrop {
-	background: rgba(0, 0, 0, 0.8);
-}
-
 .sheet-dialog[open] .sheet-content {
 	animation: slide-in-from-right 0.5s ease-in-out forwards;
 }
@@ -91,8 +87,8 @@ class SheetElement extends HTMLElement {
 	private contentContainer: HTMLElement | null = null;
 
 	connectedCallback() {
-		this.injectStyles();
 		this.innerHTML = `
+			<style>${SHEET_STYLES}</style>
 			<dialog class="sheet-dialog">
 				<div class="sheet-content">
 					<button type="button" class="sheet-close" aria-label="Close">
@@ -114,14 +110,6 @@ class SheetElement extends HTMLElement {
 	disconnectedCallback() {
 		this.dialog = null;
 		this.contentContainer = null;
-	}
-
-	private injectStyles() {
-		if (document.getElementById("cfdocs-sheet-styles")) return;
-		const style = document.createElement("style");
-		style.id = "cfdocs-sheet-styles";
-		style.textContent = SHEET_STYLES;
-		document.head.appendChild(style);
 	}
 
 	private setupEventListeners() {
