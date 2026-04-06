@@ -18,10 +18,9 @@ Workers has several related primitives. They serve different purposes and do not
 
 | Primitive | Created by | What it is |
 | --- | --- | --- |
-| **Version** | `wrangler deploy` or `wrangler versions upload` | A code + config snapshot on the production Worker |
-| **Deployment** | `wrangler deploy` or `wrangler versions deploy` | Traffic routing to one or more production versions. Supports gradual rollouts and rollbacks |
-| **Preview** | `wrangler preview` | An isolated branch environment with its own URL, bindings, and resources |
-| **Preview deployment** | `wrangler preview` (each run on the same branch) | An immutable snapshot within a preview |
+| **Version** | `wrangler deploy` or `wrangler versions upload` | An immutable snapshot of your Worker's code and config |
+| **Deployment** | `wrangler deploy` or `wrangler versions deploy` | Routes production traffic to one or more versions. Supports gradual rollouts and rollbacks |
+| **Preview** | `wrangler preview` | An isolated environment tied to a branch, with its own stable URL, bindings, and resources. Each run pushes new code to the preview — the stable URL always points to the latest push |
 
 ### Key differences
 
@@ -90,7 +89,6 @@ Worker Previews support three domain types, each with independent production and
 | Domain type | Preview URL pattern | Configured via |
 | --- | --- | --- |
 | `workers.dev` | `<PREVIEW_NAME>-<WORKER_NAME>.<SUBDOMAIN>.workers.dev` | Worker settings |
-| `cloudflare.app` | `<PREVIEW_NAME>-<WORKER_NAME>.cloudflare.app` | Worker settings |
 | Custom domains | `<PREVIEW_NAME>.app.example.com` | Domains API with `previews_enabled: true` |
 
 When `previews_enabled` is set on a custom domain, a wildcard DNS record and wildcard SSL SAN are created automatically. Each preview gets a subdomain of the custom domain.

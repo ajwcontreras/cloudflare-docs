@@ -20,15 +20,14 @@ Custom domain support for Worker Previews is currently in private beta.
 
 ## How it works
 
-All three domain types that Workers support follow the same pattern — each has a production flag and a `previews_enabled` flag:
+Both `workers.dev` and custom domains support preview traffic, each with a `previews_enabled` flag:
 
 | Domain type | Configured via | Production default | Previews default |
 | --- | --- | --- | --- |
 | `workers.dev` | Worker settings API | Not enabled | Not enabled |
-| `cloudflare.app` | Worker settings API | Not enabled | Not enabled |
 | Custom domains | Domains API | `true` | `false` |
 
-- **workers.dev and cloudflare.app** are settings on the Worker itself. Nothing is enabled by default — you explicitly enable them through the Worker settings.
+- **workers.dev** is a setting on the Worker itself. Not enabled by default — you explicitly enable it through the Worker settings.
 - **Custom domains** are separate resources created through the [Domains API](/api/resources/workers/subresources/domains/methods/update/). When created, `production_enabled` defaults to `true` and `previews_enabled` defaults to `false`.
 
 When you set `previews_enabled` to `true` on a custom domain (for example, `app.example.com`), each preview automatically gets a subdomain. A preview called `new-checkout` becomes accessible at `new-checkout.app.example.com`. A wildcard DNS record and wildcard SSL certificate are created automatically behind the scenes.
