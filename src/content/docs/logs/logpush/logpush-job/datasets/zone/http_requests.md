@@ -57,6 +57,12 @@ Type: `int`
 
 Number of bytes returned by the cache.
 
+## CacheResponseBytes2
+
+Type: `int`
+
+Number of bytes returned by the cache.
+
 ## CacheResponseStatus (deprecated)
 
 Type: `int`
@@ -68,12 +74,6 @@ HTTP status code returned by the cache to the edge. All requests (including non-
 Type: `bool`
 
 Tiered Cache was used to serve this request.
-
-## ClientASN
-
-Type: `int`
-
-Client AS number.
 
 ## ClientCity
 
@@ -242,12 +242,6 @@ List of content object sizes.
 Type: `array[string]`
 
 List of content types.
-
-## Cookies
-
-Type: `object`
-
-String key-value pairs for cookies. This field is populated based on [Logpush Custom fields](/logs/logpush/logpush-job/custom-fields/), which need to be configured.
 
 ## EdgeCFConnectingO2O
 
