@@ -73,8 +73,15 @@ function flatSchemaToRows(schemaObj: Record<string, unknown>): SchemaRowData[] {
 	}));
 }
 
-// Generate unique ID for sessionStorage keys
-const schemaId = `schema-${title.toLowerCase()}-${Date.now()}`;
+// Generate a stable ID for sessionStorage keys based on schema content.
+// Using a simple hash of the JSON so the key is consistent across builds —
+// Date.now() was non-deterministic and silently lost user state on every deploy.
+const schemaJson = JSON.stringify(schema);
+let schemaHash = 0;
+for (let i = 0; i < schemaJson.length; i++) {
+	schemaHash = (schemaHash * 31 + schemaJson.charCodeAt(i)) >>> 0;
+}
+const schemaId = `schema-${title.toLowerCase()}-${schemaHash.toString(36)}`;
 
 type ReferenceInfo = {
 	source: string | null;
@@ -196,11 +203,10 @@ function collectRows(
 			(reg.annotations?.description as string | undefined) ??
 			nullableChildDescription;
 		// Check both validations and fragment for enum (different schema parsers put it in different places)
-		const enumValues =
-			((reg.validations?.enum as unknown[]) ??
-				((reg.fragment as Record<string, unknown>)?.enum as unknown[]))?.map(
-				String,
-			);
+		const enumValues = (
+			(reg.validations?.enum as unknown[]) ??
+			((reg.fragment as Record<string, unknown>)?.enum as unknown[])
+		)?.map(String);
 
 		// Collect all metadata from fragment and validations
 		const metadata: Record<string, string | number | boolean> = {};
@@ -429,7 +435,12 @@ const variantRows =
 				No parameters defined.
 			</p>
 		) : (
-			<SchemaTreeView rows={rows} schemaId={schemaId} hideRequired={hideRequired} client:visible />
+			<SchemaTreeView
+				rows={rows}
+				schemaId={schemaId}
+				hideRequired={hideRequired}
+				client:visible
+			/>
 		)
 	}
 </div>
