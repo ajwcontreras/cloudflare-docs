@@ -13,7 +13,7 @@ import { middlecacheLoader } from "./util/custom-loaders";
 
 import {
 	appsSchema,
-	catalogModelsSchema,
+	aiModelCardSchema,
 	changelogSchema,
 	baseSchema,
 	notificationsSchema,
@@ -23,7 +23,6 @@ import {
 	glossarySchema,
 	learningPathsSchema,
 	videosSchema,
-	workersAiModelsSchema,
 	warpReleasesSchema,
 	releaseNotesSchema,
 	fieldsSchema,
@@ -101,13 +100,41 @@ export const collections = {
 			generateId: ({ entry }) => entry.replace(/\.(json|yml|yaml)$/, ""),
 		}),
 	}),
-	"workers-ai-models": defineCollection({
-		loader: dataLoader("workers-ai-models"),
-		schema: workersAiModelsSchema,
+	// ai-catalog: all models (catalog + Workers AI merged), card fields only.
+	// Powers /ai/models/ index. Fetched from middlecache at build time.
+	"ai-catalog": defineCollection({
+		loader: middlecacheLoader(
+			"v1/workers-ai-model-catalog/ai-catalog.json",
+			{
+				parser: (fileContent: string) => {
+					const data = JSON.parse(fileContent) as {
+						models: Array<{ model_id: string }>;
+					};
+					return Object.fromEntries(
+						data.models.map((m) => [m.model_id, m]),
+					);
+				},
+			},
+		),
+		schema: aiModelCardSchema,
 	}),
-	"catalog-models": defineCollection({
-		loader: dataLoader("catalog-models"),
-		schema: catalogModelsSchema,
+	// workers-ai-catalog: legacy-only subset, card fields only.
+	// Powers /workers-ai/models/ index. Fetched from middlecache at build time.
+	"workers-ai-catalog": defineCollection({
+		loader: middlecacheLoader(
+			"v1/workers-ai-model-catalog/workers-ai-catalog.json",
+			{
+				parser: (fileContent: string) => {
+					const data = JSON.parse(fileContent) as {
+						models: Array<{ model_id: string }>;
+					};
+					return Object.fromEntries(
+						data.models.map((m) => [m.model_id, m]),
+					);
+				},
+			},
+		),
+		schema: aiModelCardSchema,
 	}),
 	videos: defineCollection({
 		loader: file("src/content/videos/index.yaml"),
