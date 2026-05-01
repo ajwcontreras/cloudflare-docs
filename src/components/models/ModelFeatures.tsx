@@ -59,7 +59,7 @@ const ModelFeatures = ({ model }: { model: ModelType }) => {
 								<tr>
 									<td>
 										Context Window
-										<a href="/workers-ai/glossary/">
+										<a href="/workers-ai/platform/glossary/">
 											<span className="external-link"> ↗</span>
 										</a>
 									</td>
