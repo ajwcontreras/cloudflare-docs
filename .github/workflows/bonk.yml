@@ -78,7 +78,7 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
 
       - name: Run Lil Bonk
-        uses: ask-bonk/ask-bonk/github@main
+        uses: Cloudflare-Studio/ask-bonk/github@main
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_AI_GATEWAY_ACCOUNT_ID }}
           CLOUDFLARE_GATEWAY_ID: ${{ secrets.CF_AI_GATEWAY_NAME }}
@@ -133,7 +133,7 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
 
       - name: Run Lil Bonk (auto-review)
-        uses: ask-bonk/ask-bonk/github@main
+        uses: Cloudflare-Studio/ask-bonk/github@main
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_AI_GATEWAY_ACCOUNT_ID }}
           CLOUDFLARE_GATEWAY_ID: ${{ secrets.CF_AI_GATEWAY_NAME }}
