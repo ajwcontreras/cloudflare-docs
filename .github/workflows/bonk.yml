@@ -94,7 +94,8 @@ jobs:
     if: |
       needs.check-codeowner.outputs.is-codeowner == 'true' &&
       github.event_name == 'pull_request' &&
-      github.event.sender.type != 'Bot'
+      github.event.sender.type != 'Bot' &&
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
