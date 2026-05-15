@@ -1,21 +1,38 @@
 ---
 title: Network analytics
 pcx_content_type: how-to
-description: Analyze network traffic patterns with Network Analytics.
-products:
-  - cloudflare-wan
 sidebar:
   order: 2
 head:
   - tag: title
-    content: Cloudflare WAN Network Analytics
+    content: Magic WAN network analytics
+
 ---
 
-import { Render } from "~/components";
+import { GlossaryTooltip, Render } from "~/components"
 
-<Render file="analytics/network-analytics"
-	product="networking-services"
-	params={{
-		magicWord: "Cloudflare WAN"
-	}}
-/>
+To start using Network Analytics:
+
+1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/) and select your account.
+2. Select **Analytics & Logs** > **Network Analytics**.
+3. You will have access to an overview of your Magic WAN network traffic data.
+
+Refer to [Network Analytics](/analytics/network-analytics/) to learn more.
+
+## Network traffic data filters
+
+Customers can filter the data in Network Analytics on different packet characteristics including:
+
+- Source and destination <GlossaryTooltip term="IP address">IP address</GlossaryTooltip>
+- Source and destination IP <GlossaryTooltip term="prefix">prefix</GlossaryTooltip>
+- Source and destination port
+- Magic Tunnel (<GlossaryTooltip term="IPsec tunnel">IPsec</GlossaryTooltip> or <GlossaryTooltip term="GRE tunnel">GRE</GlossaryTooltip>)
+- <GlossaryTooltip term="autonomous system numbers (ASNs)">ASN</GlossaryTooltip>
+- Protocol
+- Cloudflare mitigation system applied
+- <GlossaryTooltip term="time-to-live (TTL)">TTL</GlossaryTooltip>
+- TCP Flags
+
+## Magic Tunnel traffic analytics
+
+<Render file="analytics/network-analytics" product="networking-services" />

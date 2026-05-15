@@ -1,58 +1,26 @@
 ---
 params:
   - productName
-  - magicWord
 ---
 
-import { Aside, DashButton, Markdown, Tabs, TabItem } from "~/components";
+import { Markdown } from "~/components";
 
-You can run traceroutes to analyze the hop-by-hop Internet path and latency between Cloudflare's network and your network.
+Magic {props.productName} customers can run traceroutes to understand the hop by hop Internet path and latencies from Cloudflare's network to their own network.
 
-{ props.magicWord === "CF1 Cloudflare WAN" && (
-  <>
-    <Markdown
-      text={`
-To run a traceroute from a specific Cloudflare data center to your network:
+To run a [traceroute](https://www.cloudflare.com/learning/network-layer/what-is-mtr/) from a specific [Cloudflare data center](https://www.cloudflare.com/network/) to your network:
 
-1. Log in to [Cloudflare One](https://one.dash.cloudflare.com/) > **Insights**.
-2. Go to **Network health** > **WAN connector health**.
-3. Find the tunnel for the traceroute.
-4. Select the three dots > **Traceroute details**.
-      `}
-      inline={false}
-    />
-  </>
-)}
-
-{ props.magicWord !== "CF1 Cloudflare WAN" && (
-  <>
-    <Markdown
-      text={`
-To run a traceroute from a specific Cloudflare data center to your network:
-
-1. Go to the **Network health** page.
-      `}
-      inline={false}
-    />
-
-<DashButton url="/?to=/:account/networking-insights/health" />
-
-	<Markdown
-		text={`
-2. Select **Connector health**.
-3. Select the tunnel for the traceroute.
-4. Select the three dots > **Traceroute details**.
-      `}
-		inline={false}
-	/>
-
-  </>
-)}
+1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/) and select your account.
+2. Go to **Magic {props.productName}** > **Tunnel Health**.
+3. Expand a [Magic connector](https://developers.cloudflare.com/cloudflare-wan/on-ramps/), and find the [Cloudflare data center](https://www.cloudflare.com/network/) where the traceroute will be run from.
+4. Select **Run traceroute**.
 
 You can access detailed data from the traceroute, including:
 
-- Time to live (TTL) and host
-- Autonomous system (AS) number
-- [Packets](https://www.cloudflare.com/learning/network-layer/what-is-a-packet/) sent in the traceroute
-- Average, minimum, and maximum latency
-- Standard deviation of latency
+- [Traceroute](https://www.cloudflare.com/learning/network-layer/what-is-mtr/) hops
+- Radar details for the target IP: AS, geolocation, URL scans
+- Average, minimum, maximum, and standard deviation for network latency
+- Packet loss percentage and packet count
+
+## Troubleshooting traceroutes
+
+Traceroutes cannot be run against private IPs. If the existing target is a private IP, navigate to your account home > Networking > Connectors to specify a customer endpoint for your [connector](https://developers.cloudflare.com/cloudflare-wan/on-ramps/) type.
