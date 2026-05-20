@@ -39,10 +39,14 @@ async function autogenSections() {
 	return sections.map((x) => {
 		return {
 			label: x,
-			autogenerate: {
-				directory: x,
-				collapsed: true,
-			},
+			items: [
+				{
+					autogenerate: {
+						directory: x,
+						collapsed: true,
+					},
+				},
+			],
 		};
 	});
 }
@@ -78,7 +82,7 @@ async function getExternalLinkPaths(dir: string): Promise<Set<string>> {
 				rel = rel.replace(/\.(mdx|md)$/, "");
 				rel = rel.replace(/\/index$/, "/");
 				if (!rel.endsWith("/")) rel += "/";
-				paths.add(rel);
+				paths.add(rel.toLowerCase());
 			}
 		}
 	}
@@ -193,9 +197,8 @@ export default defineConfig({
 									"/workers-ai/models/**",
 									"/markdown.zip",
 									"/style-guide/index.md",
-									"/videos/**",
-									"/search/**",
 									"/agent-setup/",
+									"/videos/**",
 								],
 							}),
 						]

@@ -9,7 +9,6 @@ export { default as AnimatedWorkflowDiagram } from "./AnimatedWorkflowDiagram.as
 export { default as APIRequest } from "./APIRequest.astro";
 export { default as AutoconfigDiagram } from "./AutoconfigDiagram.astro";
 export { default as AvailableNotifications } from "./AvailableNotifications.astro";
-export { default as Checkbox } from "./Checkbox.astro";
 export { default as CompatibilityFlag } from "./CompatibilityFlag.astro";
 export { default as CompatibilityFlags } from "./CompatibilityFlags.astro";
 export { default as ComponentUsage } from "./ComponentUsage.astro";
@@ -20,7 +19,6 @@ export { default as Description } from "./Description.astro";
 export { default as Details } from "./Details.astro";
 export { default as DirectoryListing } from "./DirectoryListing.astro";
 export { default as Example } from "./Example.astro";
-export { default as ExternalResources } from "./ExternalResources.astro";
 export { default as ExtraFlagDetails } from "./ExtraFlagDetails.astro";
 export { default as Feature } from "./Feature.astro";
 export { default as FeatureTable } from "./FeatureTable.astro";
@@ -63,7 +61,6 @@ export { default as TagsUsage } from "./TagsUsage.astro";
 export { default as TunnelCalculator } from "./TunnelCalculator.astro";
 export { default as Type } from "./Type.astro";
 export { default as TypeScriptExample } from "./TypeScriptExample.astro";
-export { default as WranglerCLI } from "./WranglerCLI.astro";
 export { default as WranglerCommand } from "./WranglerCommand.astro";
 export { default as WranglerNamespace } from "./WranglerNamespace.astro";
 export { default as WranglerConfig } from "./WranglerConfig.astro";
@@ -73,7 +70,6 @@ export { default as WorkersArchitectureDiagram } from "./WorkersArchitectureDiag
 export { default as WorkersIsolateDiagram } from "./WorkersIsolateDiagram.astro";
 export { default as WorkersTemplates } from "./WorkersTemplates.astro";
 export { default as YouTube } from "./YouTube.astro";
-export { default as YouTubeVideos } from "./YouTubeVideos.astro";
 
 // Taken from Astro
 export { default as ListCard } from "./astro/ListCard.astro";
