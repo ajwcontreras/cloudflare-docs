@@ -1,0 +1,23 @@
+---
+title: Hyperdrive exposes database connection pool size metrics
+description: Hyperdrive configurations now export connection pool size metrics via GraphQL and a new dashboard chart.
+products:
+  - hyperdrive
+date: 2026-05-15
+---
+
+You can now view the size of your Hyperdrive connection pools, giving you the ability to self-diagnose connection contention. Using the new `hyperdrivePoolSizesAdaptiveGroups` node in the GraphQL Analytics API, you can see waiting connections, open connections, and the pool size maximum (the configured ceiling) for each of your configurations.
+
+A new **Pool connections** chart has been added to the **Metrics** tab of each Hyperdrive configuration in the Cloudflare dashboard. The chart displays an aggregate **All locations** view by default, and you can use the location selector to drill down into specific locations by airport code.
+
+![Hyperdrive pool size metrics chart](~/assets/images/hyperdrive/changelog/hyperdrive-pool-size-metrics-chart.png)
+
+The chart shows:
+
+- **Waiting connections**: Client requests waiting for an available connection.
+- **Open connections**: Active connections to your database.
+- **Pool size maximum**: Your configured origin connection limit.
+
+Connection contention appears as a spike in waiting connections, or when open connections consistently approach the pool size maximum. If your open connections regularly approach this limit, consider [increasing your Hyperdrive connection limit](/hyperdrive/platform/limits/#request-a-limit-increase).
+
+For more information, refer to [Metrics and analytics](/hyperdrive/observability/metrics-and-analytics/) and [Connection pooling](/hyperdrive/concepts/connection-pooling/).
