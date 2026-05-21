@@ -23,22 +23,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/simple-video-generation.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/simple-video-generation.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/Qrv5liBE2jIQGRDApZX3a29JonqAVqG3t4G1ETv19P4NNNmF/tmp10j6l7kq.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3',\n  {\n    prompt:\n      'A golden retriever running through a field of sunflowers on a sunny day',\n    duration: '6s',\n    aspect_ratio: '16:9',\n    resolution: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": \"6s\",\n    \"generate_audio\": true,\n    \"prompt\": \"A golden retriever running through a field of sunflowers on a sunny day\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -53,22 +49,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/cinematic-scene.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/cinematic-scene.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/fdpQsMaH87WeGEWnkx1pYvjRHCFfIi3bVqbMBz9Am3BstpxsA/tmp8h2u1ex8.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3',\n  {\n    prompt:\n      'A dramatic drone shot flying through misty mountain peaks at sunrise, with clouds rolling through valleys below',\n    duration: '8s',\n    aspect_ratio: '16:9',\n    resolution: '1080p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": \"8s\",\n    \"generate_audio\": true,\n    \"prompt\": \"A dramatic drone shot flying through misty mountain peaks at sunrise, with clouds rolling through valleys below\",\n    \"resolution\": \"1080p\"\n  }\n}'"
 				}
 			]
 		},
@@ -83,22 +75,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/vertical-video.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/vertical-video.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/GNaLYGbrTnp0OFmybLHoLJORO1N9e79zOb0eB18ugD0t30YWA/tmpemweriil.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3',\n  {\n    prompt:\n      'A barista expertly pouring latte art, close-up shot with shallow depth of field',\n    duration: '6s',\n    aspect_ratio: '9:16',\n    resolution: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3\",\n  \"input\": {\n    \"aspect_ratio\": \"9:16\",\n    \"duration\": \"6s\",\n    \"generate_audio\": true,\n    \"prompt\": \"A barista expertly pouring latte art, close-up shot with shallow depth of field\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -113,22 +101,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/short-format.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/short-format.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/YKF9m3T3f8UtTqHGD41RH7R3Rjet5fxDaTRMSbM8B7wwwpxsA/tmpj6sv2kzs.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3',\n  {\n    prompt: 'A timelapse of a flower blooming, soft natural lighting',\n    duration: '4s',\n    aspect_ratio: '16:9',\n    resolution: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": \"4s\",\n    \"generate_audio\": true,\n    \"prompt\": \"A timelapse of a flower blooming, soft natural lighting\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -143,22 +127,18 @@
 				"generate_audio": false
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/silent-video.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3/silent-video.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/ohwJGobimexoHisdwlxKWMDGzsNA3kY5ol3Amcq4TW2tcaMLA/tmp8t9bgd34.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3',\n  {\n    prompt: 'Abstract flowing liquid metal morphing into geometric shapes',\n    duration: '6s',\n    aspect_ratio: '16:9',\n    resolution: '720p',\n    generate_audio: false,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": \"6s\",\n    \"generate_audio\": false,\n    \"prompt\": \"Abstract flowing liquid metal morphing into geometric shapes\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		}
@@ -166,7 +146,7 @@
 	"supports_async": false,
 	"external_info": "https://deepmind.google/technologies/veo/",
 	"terms": "https://ai.google.dev/gemini-api/terms",
-	"cover_image_url": "https://pub-26f1392c1b674324be6786695bd72257.r2.dev/google/veo-3.png",
+	"cover_image_url": "https://tjzk.replicate.delivery/models_models_featured_image/0ca4ee69-0f6e-4dc8-9dc6-3063b97b0a50/replicate-prediction-whcj9787.webp",
 	"metadata": {
 		"Max Duration": "8 seconds",
 		"Audio Generation": "Yes",
@@ -178,6 +158,8 @@
 	"zdr": false,
 	"zdr_comment": null,
 	"schema": {
+		"model_id": "google/veo-3",
+		"version": "1.0.0",
 		"input": {
 			"$schema": "https://json-schema.org/draft/2020-12/schema",
 			"type": "object",

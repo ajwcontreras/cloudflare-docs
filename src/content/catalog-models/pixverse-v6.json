@@ -21,26 +21,21 @@
 				"prompt": "A golden retriever running through a field of sunflowers on a sunny day",
 				"duration": 5,
 				"aspect_ratio": "16:9",
-				"quality": "720p",
-				"generate_audio": true
+				"quality": "720p"
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/pixverse__v6/simple-video.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2Fda2a0d44-a700-4c6b-a36b-fff6951fd1d4_seed1150795460.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/pixverse-v6/simple-video.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
-					"code": "const response = await env.AI.run(\n  'pixverse/v6',\n  {\n    prompt:\n      'A golden retriever running through a field of sunflowers on a sunny day',\n    duration: 5,\n    aspect_ratio: '16:9',\n    quality: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+					"code": "const response = await env.AI.run(\n  'pixverse/v6',\n  {\n    prompt:\n      'A golden retriever running through a field of sunflowers on a sunny day',\n    duration: 5,\n    aspect_ratio: '16:9',\n    quality: '720p',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"pixverse/v6\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": 5,\n    \"generate_audio\": true,\n    \"prompt\": \"A golden retriever running through a field of sunflowers on a sunny day\",\n    \"quality\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -55,22 +50,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/pixverse__v6/long-duration-video.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2F46e3adfb-a95f-4c03-bdad-a6d7131a98b8_seed61570270.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/pixverse-v6/long-duration-video.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'pixverse/v6',\n  {\n    prompt:\n      'A time-lapse of a bustling city street from dawn to dusk, showing the flow of people and vehicles',\n    duration: 15,\n    aspect_ratio: '16:9',\n    quality: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"pixverse/v6\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": 15,\n    \"generate_audio\": true,\n    \"prompt\": \"A time-lapse of a bustling city street from dawn to dusk, showing the flow of people and vehicles\",\n    \"quality\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -85,22 +76,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/pixverse__v6/ultra-wide-cinematic.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2F54327d38-e03a-44de-9a21-2052356779e5_seed286185598.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/pixverse-v6/ultra-wide-cinematic.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'pixverse/v6',\n  {\n    prompt:\n      'A dramatic aerial shot flying over misty mountain peaks at sunrise, cinematic lighting with volumetric fog',\n    duration: 10,\n    aspect_ratio: '21:9',\n    quality: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"pixverse/v6\",\n  \"input\": {\n    \"aspect_ratio\": \"21:9\",\n    \"duration\": 10,\n    \"generate_audio\": true,\n    \"prompt\": \"A dramatic aerial shot flying over misty mountain peaks at sunrise, cinematic lighting with volumetric fog\",\n    \"quality\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -116,30 +103,26 @@
 				"generate_audio": false
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/pixverse__v6/silent-video.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Fori%2F06c27c41-cadd-44c5-b418-a78b96555479_seed1048443720.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/pixverse-v6/silent-video.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'pixverse/v6',\n  {\n    prompt:\n      'Abstract ink drops spreading through water, vivid colors mixing in slow motion',\n    negative_prompt: 'blurry, low quality',\n    duration: 3,\n    aspect_ratio: '1:1',\n    quality: '540p',\n    generate_audio: false,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"pixverse/v6\",\n  \"input\": {\n    \"aspect_ratio\": \"1:1\",\n    \"duration\": 3,\n    \"generate_audio\": false,\n    \"negative_prompt\": \"blurry, low quality\",\n    \"prompt\": \"Abstract ink drops spreading through water, vivid colors mixing in slow motion\",\n    \"quality\": \"540p\"\n  }\n}'"
 				}
 			]
 		}
 	],
 	"supports_async": false,
 	"external_info": "https://pixverse.ai/",
-	"terms": "https://pixverse.ai/terms",
-	"cover_image_url": "https://pub-26f1392c1b674324be6786695bd72257.r2.dev/pixverse/v6.png",
+	"terms": "https://pixverse.ai/en/terms-of-service/",
+	"cover_image_url": null,
 	"metadata": {
 		"Max Duration": "15 seconds",
 		"Resolutions": "360p, 540p, 720p, 1080p",
@@ -153,6 +136,8 @@
 	"zdr": false,
 	"zdr_comment": null,
 	"schema": {
+		"model_id": "pixverse/v6",
+		"version": "1.0.0",
 		"input": {
 			"$schema": "https://json-schema.org/draft/2020-12/schema",
 			"type": "object",

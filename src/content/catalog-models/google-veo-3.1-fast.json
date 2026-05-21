@@ -24,22 +24,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/quick-demo.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/quick-demo.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/bgvHjdeBRuxeakY9DVQOvFvXK9QBWeFDiSPfPE5JxA6qFVjZB/tmphg0x9a7g.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3.1-fast',\n  {\n    prompt: 'A butterfly landing on a colorful flower in a garden',\n    duration: '6s',\n    aspect_ratio: '16:9',\n    resolution: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3.1-fast\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": \"6s\",\n    \"generate_audio\": true,\n    \"prompt\": \"A butterfly landing on a colorful flower in a garden\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -54,22 +50,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/social-content.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/social-content.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/DCkE6FDc8qIGLpklpzKriZONIxMHiaSVfxW9YwMW29UFpaMLA/tmpfk788pc_.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3.1-fast',\n  {\n    prompt:\n      'Aesthetic morning routine: sun rays through curtains, coffee being poured',\n    duration: '6s',\n    aspect_ratio: '9:16',\n    resolution: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3.1-fast\",\n  \"input\": {\n    \"aspect_ratio\": \"9:16\",\n    \"duration\": \"6s\",\n    \"generate_audio\": true,\n    \"prompt\": \"Aesthetic morning routine: sun rays through curtains, coffee being poured\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -84,22 +76,18 @@
 				"generate_audio": false
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/motion-graphics.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/motion-graphics.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/cQjpeAZhjJXYEi8HzaoHYHO1LWvHnKczDfB5YDcrrI3oS1YWA/tmpc5mup0o7.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3.1-fast',\n  {\n    prompt:\n      'Glowing neon lines forming geometric patterns on a dark background',\n    duration: '4s',\n    aspect_ratio: '16:9',\n    resolution: '720p',\n    generate_audio: false,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3.1-fast\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": \"4s\",\n    \"generate_audio\": false,\n    \"prompt\": \"Glowing neon lines forming geometric patterns on a dark background\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		},
@@ -114,22 +102,18 @@
 				"generate_audio": true
 			},
 			"output": {
-				"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/ambient-scene.mp4"
-			},
-			"raw_response": {
-				"state": "Completed",
-				"result": {
-					"video": "https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/google__veo-3.1-fast/ambient-scene.mp4"
-				},
-				"gatewayMetadata": {
-					"keySource": "Unified"
-				}
+				"video": "https://replicate.delivery/xezq/ZX40MrTBmj5QC9vsEz4QSb8SGtjWU6bpUMnjXRbLYCPepaMLA/tmpfwxbqeig.mp4"
 			},
 			"code_snippets": [
 				{
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'google/veo-3.1-fast',\n  {\n    prompt:\n      'Rain falling on a window with a blurred city skyline in the background at night',\n    duration: '8s',\n    aspect_ratio: '16:9',\n    resolution: '720p',\n    generate_audio: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"google/veo-3.1-fast\",\n  \"input\": {\n    \"aspect_ratio\": \"16:9\",\n    \"duration\": \"8s\",\n    \"generate_audio\": true,\n    \"prompt\": \"Rain falling on a window with a blurred city skyline in the background at night\",\n    \"resolution\": \"720p\"\n  }\n}'"
 				}
 			]
 		}
@@ -137,7 +121,7 @@
 	"supports_async": false,
 	"external_info": "https://deepmind.google/technologies/veo/",
 	"terms": "https://ai.google.dev/gemini-api/terms",
-	"cover_image_url": "https://pub-26f1392c1b674324be6786695bd72257.r2.dev/google/veo-3.1-fast.png",
+	"cover_image_url": null,
 	"metadata": {
 		"Max Duration": "8 seconds",
 		"Audio Generation": "Yes",
@@ -149,6 +133,8 @@
 	"zdr": false,
 	"zdr_comment": null,
 	"schema": {
+		"model_id": "google/veo-3.1-fast",
+		"version": "1.0.0",
 		"input": {
 			"$schema": "https://json-schema.org/draft/2020-12/schema",
 			"type": "object",

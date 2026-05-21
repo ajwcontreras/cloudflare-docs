@@ -108,6 +108,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'openai/gpt-5.5-pro',\n  {\n    input: 'What are the three laws of thermodynamics?',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/responses \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"openai/gpt-5.5-pro\",\n  \"input\": \"What are the three laws of thermodynamics?\"\n}'"
 				}
 			]
 		},
@@ -205,6 +210,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'openai/gpt-5.5-pro',\n  {\n    input: 'How do I read a JSON file in Python?',\n    instructions: 'You are a helpful coding assistant specializing in Python.',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/responses \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"openai/gpt-5.5-pro\",\n  \"input\": \"How do I read a JSON file in Python?\",\n  \"instructions\": \"You are a helpful coding assistant specializing in Python.\"\n}'"
 				}
 			]
 		},
@@ -302,6 +312,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'openai/gpt-5.5-pro',\n  {\n    input: [\n      {\n        role: 'user',\n        content:\n          'I need help planning a road trip from San Francisco to Los Angeles.',\n      },\n      {\n        role: 'assistant',\n        content:\n          \"I'd be happy to help! The drive is about 380 miles and takes roughly 5-6 hours. Would you like suggestions for scenic routes or interesting stops along the way?\",\n      },\n      {\n        role: 'user',\n        content: 'Yes, what are some good places to stop?',\n      },\n    ],\n    max_output_tokens: 150,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/responses \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"openai/gpt-5.5-pro\",\n  \"input\": [\n    {\n      \"content\": \"I need help planning a road trip from San Francisco to Los Angeles.\",\n      \"role\": \"user\"\n    },\n    {\n      \"content\": \"I'd be happy to help! The drive is about 380 miles and takes roughly 5-6 hours. Would you like suggestions for scenic routes or interesting stops along the way?\",\n      \"role\": \"assistant\"\n    },\n    {\n      \"content\": \"Yes, name three good stops in one short sentence each.\",\n      \"role\": \"user\"\n    }\n  ],\n  \"max_output_tokens\": 16000\n}'"
 				}
 			]
 		},
@@ -399,6 +414,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'openai/gpt-5.5-pro',\n  {\n    input: 'Write a haiku about artificial intelligence',\n    temperature: 1,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/responses \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"openai/gpt-5.5-pro\",\n  \"input\": \"Write a haiku about artificial intelligence\",\n  \"temperature\": 1\n}'"
 				}
 			]
 		},
@@ -498,6 +518,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'openai/gpt-5.5-pro',\n  {\n    input:\n      'Solve this problem step by step: A train leaves Chicago at 60mph heading east. Another train leaves New York at 80mph heading west. They are 900 miles apart. When do they meet?',\n    reasoning: {\n      effort: 'medium',\n    },\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/responses \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"openai/gpt-5.5-pro\",\n  \"input\": \"Solve this problem step by step: A train leaves Chicago at 60mph heading east. Another train leaves New York at 80mph heading west. They are 900 miles apart. When do they meet?\",\n  \"reasoning\": {\n    \"effort\": \"medium\"\n  }\n}'"
 				}
 			]
 		}

@@ -43,6 +43,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'inworld/tts-2',\n  {\n    text: 'Hello! Welcome to Cloudflare AI Gateway. Let me show you what we can do.',\n    voice_id: 'Dennis',\n    output_format: 'mp3',\n    temperature: 1,\n    timestamp_type: 'none',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"inworld/tts-2\",\n  \"input\": {\n    \"output_format\": \"mp3\",\n    \"temperature\": 1,\n    \"text\": \"Hello! Welcome to Cloudflare AI Gateway. Let me show you what we can do.\",\n    \"timestamp_type\": \"none\",\n    \"voice_id\": \"Dennis\"\n  }\n}'"
 				}
 			]
 		},
@@ -73,6 +78,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'inworld/tts-2',\n  {\n    text: \"[speak with excitement] I'm really excited about Inworld's new model. Have you tried out the steering capabilities? It's pretty cool!\",\n    voice_id: 'Dennis',\n    output_format: 'mp3',\n    temperature: 1,\n    timestamp_type: 'none',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"inworld/tts-2\",\n  \"input\": {\n    \"output_format\": \"mp3\",\n    \"temperature\": 1,\n    \"text\": \"[speak with excitement] I'm really excited about Inworld's new model. Have you tried out the steering capabilities? It's pretty cool!\",\n    \"timestamp_type\": \"none\",\n    \"voice_id\": \"Dennis\"\n  }\n}'"
 				}
 			]
 		},
@@ -103,6 +113,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'inworld/tts-2',\n  {\n    text: '[whisper] This is a secret just between us.',\n    voice_id: 'Dennis',\n    output_format: 'mp3',\n    temperature: 1,\n    timestamp_type: 'none',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"inworld/tts-2\",\n  \"input\": {\n    \"output_format\": \"mp3\",\n    \"temperature\": 1,\n    \"text\": \"[whisper] This is a secret just between us.\",\n    \"timestamp_type\": \"none\",\n    \"voice_id\": \"Dennis\"\n  }\n}'"
 				}
 			]
 		},
@@ -134,6 +149,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'inworld/tts-2',\n  {\n    text: 'This recording is generated at studio quality for the best possible listening experience.',\n    voice_id: 'Dennis',\n    output_format: 'mp3',\n    sample_rate: 48000,\n    temperature: 1,\n    timestamp_type: 'none',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"inworld/tts-2\",\n  \"input\": {\n    \"output_format\": \"mp3\",\n    \"sample_rate\": 48000,\n    \"temperature\": 1,\n    \"text\": \"This recording is generated at studio quality for the best possible listening experience.\",\n    \"timestamp_type\": \"none\",\n    \"voice_id\": \"Dennis\"\n  }\n}'"
 				}
 			]
 		},
@@ -165,6 +185,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'inworld/tts-2',\n  {\n    text: 'The meeting is at 3:30 PM on Jan 15th, 2026. Please confirm by calling 555-0123.',\n    voice_id: 'Dennis',\n    output_format: 'mp3',\n    temperature: 1,\n    timestamp_type: 'none',\n    apply_text_normalization: true,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"inworld/tts-2\",\n  \"input\": {\n    \"apply_text_normalization\": true,\n    \"output_format\": \"mp3\",\n    \"temperature\": 1,\n    \"text\": \"The meeting is at 3:30 PM on Jan 15th, 2026. Please confirm by calling 555-0123.\",\n    \"timestamp_type\": \"none\",\n    \"voice_id\": \"Dennis\"\n  }\n}'"
 				}
 			]
 		}
@@ -177,7 +202,7 @@
 		"Languages": "15 production + 90+ experimental",
 		"Steering": "Natural language"
 	},
-	"created_at": "2026-05-04 22:13:05",
+	"created_at": "2026-05-05 00:17:34",
 	"default_example": null,
 	"code_snippets": [],
 	"zdr": false,

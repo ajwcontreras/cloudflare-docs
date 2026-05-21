@@ -36,6 +36,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'alibaba/hh1-i2v',\n  {\n    image:\n      'https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png',\n    prompt: 'A gentle camera push-in on the scene with soft ambient lighting',\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"alibaba/hh1-i2v\",\n  \"input\": {\n    \"image\": \"https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png\",\n    \"prompt\": \"A gentle camera push-in on the scene with soft ambient lighting\"\n  }\n}'"
 				}
 			]
 		},
@@ -65,6 +70,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'alibaba/hh1-i2v',\n  {\n    image:\n      'https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png',\n    prompt: 'Subject begins rapping confidently to the beat, head bobbing',\n    resolution: '1080P',\n    duration: 10,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"alibaba/hh1-i2v\",\n  \"input\": {\n    \"duration\": 10,\n    \"image\": \"https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png\",\n    \"prompt\": \"Subject begins rapping confidently to the beat, head bobbing\",\n    \"resolution\": \"1080P\"\n  }\n}'"
 				}
 			]
 		},
@@ -95,6 +105,11 @@
 					"label": "typescript",
 					"language": "typescript",
 					"code": "const response = await env.AI.run(\n  'alibaba/hh1-i2v',\n  {\n    image:\n      'https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png',\n    prompt: 'Camera orbits slowly around the subject under streetlamp light',\n    resolution: '720P',\n    duration: 8,\n    seed: 42,\n  },\n  {\n    gateway: { id: 'default' },\n  }\n)\nconsole.log(response)"
+				},
+				{
+					"label": "curl",
+					"language": "bash",
+					"code": "curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n  \"model\": \"alibaba/hh1-i2v\",\n  \"input\": {\n    \"duration\": 8,\n    \"image\": \"https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png\",\n    \"prompt\": \"Camera orbits slowly around the subject under streetlamp light\",\n    \"resolution\": \"720P\",\n    \"seed\": 42\n  }\n}'"
 				}
 			]
 		}
@@ -108,7 +123,7 @@
 		"Max Duration": "15 seconds",
 		"Input": "Image URL (no base64)"
 	},
-	"created_at": "2026-04-27 16:27:53",
+	"created_at": "2026-04-27 16:31:19",
 	"default_example": null,
 	"code_snippets": [],
 	"zdr": false,
